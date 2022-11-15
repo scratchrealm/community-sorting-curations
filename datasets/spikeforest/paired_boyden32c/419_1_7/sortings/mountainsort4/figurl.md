@@ -1,0 +1,4 @@
+
+## spikeforest.paired_boyden32c.419_1_7.mountainsort4
+
+[Follow this link to start curation](https://figurl.org/f?v=gs://figurl/spikesortingview-10&d=sha1://73749172638da35f2aa38ffd16e82b04fd9a7654&label=spikeforest.paired_boyden32c.419_1_7.mountainsort4)

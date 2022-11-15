@@ -1,17 +1,22 @@
 import json
-import spikeforest as sf
+import click
 import spikeinterface as si
-import spikeinterface.preprocessing as spre
 import sortingview as sv
 import sortingview.views as vv
 from sortingview.SpikeSortingView import SpikeSortingView
 
 
-def main():
-    collection_name = 'spikeforest'
-    study_name = 'paired_boyden32c'
-    recording_name = '1103_1_1'
-    sorting_name = 'mountainsort4'
+@click.command(help="Create figurl")
+@click.option('--collection')
+@click.option('--study')
+@click.option('--recording')
+@click.option('--sorter')
+def main(collection, study, recording, sorter):
+    collection_name = collection
+    study_name = study
+    recording_name = recording
+    sorter_name = sorter
+
     github_issue_url = 'https://github.com/scratchrealm/community-sorting-curations/issues/2'
 
     instructions = f'''
@@ -22,19 +27,19 @@ the curation, save a snapshot, copy the sha1:// URI and then
 '''
 
     dirname = f'datasets/{collection_name}/{study_name}/{recording_name}'
-    sorting_dirname = f'{dirname}/sortings/{sorting_name}'
+    sorting_dirname = f'{dirname}/sortings/{sorter_name}'
 
     with open(f'{dirname}/recording.json', 'r') as f:
         recording_object = json.load(f)
     with open(f'{sorting_dirname}/sorting.json', 'r') as f:
         sorting_object = json.load(f)
 
-    recording = sv.load_recording_extractor(recording_object)
+    rec = sv.load_recording_extractor(recording_object)
     sorting = sv.load_sorting_extractor(sorting_object)
 
-    view = _create_view(R=recording, S=sorting, instructions=instructions)
+    view = _create_view(R=rec, S=sorting, instructions=instructions)
 
-    label = f'{collection_name}.{study_name}.{recording_name}.{sorting_name}'
+    label = f'{collection_name}.{study_name}.{recording_name}.{sorter_name}'
     url = view.url(label=label)
     with open(f'{sorting_dirname}/figurl.url', 'w') as f:
         f.write(url)

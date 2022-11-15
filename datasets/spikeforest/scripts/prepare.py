@@ -5,7 +5,7 @@ import sortingview as sv
 
 def main():
     study_name = 'paired_boyden32c'
-    recording_name = '1103_1_1'
+    recording_name = '419_1_7'
     R = sf.load_spikeforest_recording(study_name=study_name, recording_name=recording_name)
     recording_object: dict = R.recording_object
     sorting_true_object: dict = R.sorting_true_object
