@@ -1,2 +1,3 @@
-# spikeforest-processing
-Processing runs for spikeforest
+# community-sorting-curations
+
+Community curation of spike sorting datasets.
